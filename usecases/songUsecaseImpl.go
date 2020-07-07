@@ -3,6 +3,7 @@ package usecases
 import (
 	"crudMusic/models"
 	"crudMusic/repositories"
+	"crudMusic/validation"
 )
 
 type SongUsecaseImpl struct {
@@ -19,6 +20,7 @@ func (s SongUsecaseImpl) GetSongs() ([]*models.Song, error) {
 
 func (s SongUsecaseImpl) GetSongByGenre(Genre string) ([]*models.Song, error) {
 	songs, err := s.songRepo.GetSongByGenre(Genre)
+	validation.ValidateInputNotNil(songs)
 	if err != nil {
 		return nil, err
 	}
@@ -27,6 +29,7 @@ func (s SongUsecaseImpl) GetSongByGenre(Genre string) ([]*models.Song, error) {
 
 func (s SongUsecaseImpl) GetSongByArtist(Artist string) ([]*models.Song, error) {
 	songs, err := s.songRepo.GetSongByArtist(Artist)
+	validation.ValidateInputNotNil(songs)
 	if err != nil {
 		return nil, err
 	}
@@ -35,6 +38,7 @@ func (s SongUsecaseImpl) GetSongByArtist(Artist string) ([]*models.Song, error) 
 
 func (s SongUsecaseImpl) GetSongByAlbum(Album string) ([]*models.Song, error) {
 	songs, err := s.songRepo.GetSongByAlbum(Album)
+	validation.ValidateInputNotNil(songs)
 	if err != nil {
 		return nil, err
 	}
@@ -43,6 +47,7 @@ func (s SongUsecaseImpl) GetSongByAlbum(Album string) ([]*models.Song, error) {
 
 func (s SongUsecaseImpl) GetSongByReleaseYear(Year int) ([]*models.Song, error) {
 	songs, err := s.songRepo.GetSongByReleaseYear(Year)
+	validation.ValidateInputNumber(songs)
 	if err != nil {
 		return nil, err
 	}
